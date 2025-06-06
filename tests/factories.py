@@ -6,10 +6,11 @@ Using the Factory Boy pattern makes it easy to create test objects
 with realistic data and helps maintain DRY principles in tests.
 """
 
-import factory
-from factory.fuzzy import FuzzyText
 from datetime import datetime, timezone
 from uuid import uuid4
+
+import factory
+from factory.fuzzy import FuzzyText
 
 from app.models.note import Note
 from app.schemas.note import NoteCreate, NoteUpdate

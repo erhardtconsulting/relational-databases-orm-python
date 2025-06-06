@@ -5,14 +5,14 @@ This module tests the NoteService with actual database operations.
 These tests verify that the service layer works correctly with a real database.
 """
 
-import pytest
 from uuid import uuid4
-from datetime import datetime, timezone
+
+import pytest
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.services.note_service import NoteService, get_note_service
 from app.models.note import Note
 from app.schemas.note import NoteCreate, NoteUpdate
+from app.services.note_service import NoteService, get_note_service
 from tests.factories import create_note_with_session, create_multiple_notes
 
 

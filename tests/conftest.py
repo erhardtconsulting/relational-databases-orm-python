@@ -19,7 +19,6 @@ from sqlalchemy.pool import StaticPool
 from app.database import Base
 from app.models.note import Note
 
-
 # Test database URL - using SQLite for fast testing
 TEST_DATABASE_URL = os.getenv("TEST_DATABASE_URL", "sqlite:///:memory:")
 

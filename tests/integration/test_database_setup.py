@@ -9,7 +9,6 @@ import pytest
 from sqlalchemy import inspect, text
 from sqlalchemy.orm import Session
 
-from app.database import Base, engine
 from app.models.note import Note
 
 

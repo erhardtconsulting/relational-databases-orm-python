@@ -5,15 +5,15 @@ This module tests the NoteService business logic using mocked database sessions.
 Unit tests focus on testing the logic in isolation without real database dependencies.
 """
 
-import pytest
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import MagicMock
 from uuid import uuid4
-from datetime import datetime, timezone
+
+import pytest
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.services.note_service import NoteService
 from app.models.note import Note
-from app.schemas.note import NoteCreate, NoteUpdate
+from app.schemas.note import NoteCreate
+from app.services.note_service import NoteService
 from tests.factories import NoteFactory, NoteCreateFactory, NoteUpdateFactory
 
 
