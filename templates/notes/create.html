@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Notes App{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <!-- Page Header -->
+        <div class="d-flex align-items-center mb-4">
+            <a href="{{ url_for('web_index') }}" class="btn btn-outline-secondary me-3">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <h1 class="h2 mb-0">
+                <i class="bi bi-plus-circle me-2"></i>
+                Create New Note
+            </h1>
+        </div>
+
+        <!-- Create Note Form -->
+        <div class="card">
+            <div class="card-body">
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="post" action="{{ url_for('web_notes_create_submit') }}">
+                    <div class="mb-3">
+                        <label for="content" class="form-label">
+                            <i class="bi bi-journal-text me-1"></i>
+                            Note Content
+                        </label>
+                        <textarea 
+                            class="form-control" 
+                            id="content" 
+                            name="content" 
+                            rows="8" 
+                            placeholder="Write your note here..."
+                            required
+                            maxlength="5000">{% if content %}{{ content }}{% endif %}</textarea>
+                        <div class="form-text">
+                            Maximum 5,000 characters
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Create Note
+                        </button>
+                        <a href="{{ url_for('web_index') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1"></i>
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Help Text -->
+        <div class="mt-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="bi bi-lightbulb me-1"></i>
+                        Tips for Writing Notes
+                    </h6>
+                    <ul class="mb-0 small">
+                        <li>Keep your notes concise and focused</li>
+                        <li>Use line breaks to organize your thoughts</li>
+                        <li>You can always edit your notes later</li>
+                        <li>Consider adding dates or tags for organization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.getElementById('content');
+    const maxLength = 10000;
+    
+    // Character counter
+    function updateCharacterCount() {
+        const remaining = maxLength - textarea.value.length;
+        const formText = textarea.parentElement.querySelector('.form-text');
+        
+        if (remaining < 100) {
+            formText.innerHTML = `<span class="text-warning">${remaining} characters remaining</span>`;
+        } else {
+            formText.innerHTML = `Maximum ${maxLength.toLocaleString()} characters`;
+        }
+    }
+    
+    // Update character count on input
+    textarea.addEventListener('input', updateCharacterCount);
+    
+    // Initial character count
+    updateCharacterCount();
+    
+    // Auto-focus the textarea
+    textarea.focus();
+    
+    // Auto-resize textarea
+    function autoResize() {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+    
+    textarea.addEventListener('input', autoResize);
+    autoResize(); // Initial resize
+});
+</script>
+{% endblock %}
