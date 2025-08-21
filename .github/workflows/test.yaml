@@ -19,7 +19,7 @@ jobs:
         python-version: '3.13'
     
     - name: Install uv package manager
-      uses: astral-sh/setup-uv@d9e0f98d3fc6adb07d1e3d37f3043649ddad06a1 # v6
+      uses: astral-sh/setup-uv@4959332f0f014c5280e7eac8b70c90cb574c9f9b # v6
     
     - name: Cache uv dependencies
       uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
